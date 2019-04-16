@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate Generator</title>
+    <link rel="stylesheet" href="{% static 'cergen/css/bootstrap.min.css' %}" >
+</head>
+<body>
+    <div class="container">
+        <div class="row border rounded shadow-sm">
+            <div class="col-md-8 border rounded shadow-sm">
+                <h4 class="mb-3">Покупатель</h4>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">ID заказчика</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Название заказчика 1</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Название заказчика 2</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Адрес</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Почтовый индекс</label>
+                        <div class="col-sm-5">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Город</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 border rounded shadow-sm">
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Тип документа</label>
+                    <div class="col-sm-5">
+                        <select class="form-control form-control-sm">
+                          <option>Калибровка</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">ID местоположения</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Язык</label>
+                    <div class="col-sm-5">
+                        <select class="form-control form-control-sm">
+                          <option>ru</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">№ заказа</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 border rounded shadow-sm">
+                <h4 class="mb-3">Получатель</h4>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">ID заказчика</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm">Взять из покупателя</button>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Название заказчика 1</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Название заказчика 2</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Адрес</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Почтовый индекс</label>
+                        <div class="col-sm-5">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Город</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 border rounded shadow-sm">
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Заказной код</label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control form-control-sm" id="customСode">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Серийный №</label>
+                    <div class="col-sm-5">
+                        <select class="form-control form-control-sm" id="serialNumber">
+                            {% for number in serial_numbers %}
+                            <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Описание</label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control form-control-sm" id="description">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Производитель</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="manufacturer">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Тэг</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="tag">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Адрес в шине</label>
+                    <div class="col-sm-5">
+                      <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 border rounded shadow-sm">
+                <h4 class="mb-3">Контактное лицо</h4>
+                <div class="form-row">
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Имя</label>
+                        <div class="col-sm-8">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Фамилия</label>
+                        <div class="col-sm-8">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 border rounded shadow-sm">
+                <h4 class="mb-3">Инженер</h4>
+                <div class="form-row">
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Имя</label>
+                        <div class="col-sm-8">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Фамилия</label>
+                        <div class="col-sm-8">
+                          <input type="email" class="form-control form-control-sm" id="colFormLabelSm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 border rounded shadow-sm">
+                <form enctype="multipart/form-data" method="post" action=".">
+                    {% csrf_token %}
+                  <div class="form-group">
+                    <label for="exampleFormControlFile1">Загрузить csv</label>
+                    <input name="equip" type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="submit" value="Загрузить" class="form-control-button">
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'cergen/js/jquery.min.js' %}"></script>
+    <script src="{% static 'cergen/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+			$('#serialNumber').change(function() {
+				var serial_number = $(this).val(); //get the current value's option
+				$.ajax({
+					type:'GET',
+					url:'get_serial_number/',
+					data:{'serial_number':serial_number},
+					dataType: "text",
+					cache: false,
+					success: function (data) {
+						json = JSON.parse(data);
+						console.log(JSON.parse(data))
+						$('#customСode').val('');
+						$('#customСode').val($('#customСode').val() + json["Ordercode"]);
+						$('#customСode').change();
+
+                        $('#description').val('');
+						$('#description').val($('#description').val() + json["Description"]);
+						$('#description').change();
+
+						$('#manufacturer').val('');
+						$('#manufacturer').val($('#manufacturer').val() + json["Manufacturer"]);
+						$('#manufacturer').change();
+
+						$('#tag').val('');
+						$('#tag').val($('#tag').val() + json["Tag no."]);
+						$('#tag').change();
+
+
+					}
+				});
+			});
+	</script>
+</body>
+</html>
