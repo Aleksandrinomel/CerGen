@@ -3,14 +3,10 @@ from django.http import JsonResponse
 from .models import DescriptionAndNumber
 import csv
 import codecs
-import json
-import random
 from .points import points
 
-def index(request):
 
-    if request.method == 'GET' :
-        print(request.GET['signal'])
+def index(request):
     serial_numbers = []
     global list_of_rows
     list_of_rows = []
@@ -33,41 +29,11 @@ def index(request):
         npoints = int(request.POST['testPointsNumber'])
         rnd = int(request.POST['decimals'])
         print(type(start), type(end), mdo, mdop, npoints, rnd)
+        #for row in request.POST.items():
+        context = dict(request.POST.items())
+        return render(request, 'cergen/template.html', context)
 
-        def points(start, end, mdop, mdo, npoints, rnd):
-            list_of_points_ref = [start, end]
-            s_n = start - end
-            list_of_points_dev = []
-            list_of_points_delta = []
-            point = start
-            all_points = {}
 
-            for i in range(npoints - 2):
-                point += ((end - start) / (npoints - 1))
-                list_of_points_ref.append(round(point, rnd))
-                list_of_points_ref.sort()
-
-            if mdop:
-                mdo /= 100
-                for j in list_of_points_ref:
-                    rand = random.uniform(-s_n * mdo, s_n * mdo)
-                    list_of_points_dev.append(round(j + rand, rnd))
-                for i in range(len(list_of_points_ref)):
-                    list_of_points_delta.append(round(abs(abs(list_of_points_ref[i])-abs(list_of_points_dev[i])) * 100 / s_n, rnd))
-            else:
-                for j in list_of_points_ref:
-                    rand = random.uniform(-mdo, mdo)
-                    list_of_points_dev.append(round(j + rand, rnd))
-                for i in range(len(list_of_points_ref)):
-                    list_of_points_delta.append(round(abs(abs(list_of_points_ref[i]) - abs(list_of_points_dev[i])), rnd))
-
-            for n in range(npoints):
-                all_points[n + 1] = [list_of_points_ref[n], list_of_points_dev[n], list_of_points_delta[n]]
-
-            return all_points
-
-        d = points(start, end, mdop, mdo, npoints, rnd)
-        print(d)
 
     procedure_descriptions = DescriptionAndNumber.objects.values_list('description', flat=True)
     procedure_numbers = DescriptionAndNumber.objects.values_list('number', flat=True)
@@ -105,3 +71,6 @@ def get_test_points(request):
     return JsonResponse(p, safe=False)
 
 
+def template(request):
+
+    return render(request, 'cergen/template.html')

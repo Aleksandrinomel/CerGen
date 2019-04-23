@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'cergen/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'cergen/css/custom.css' %}" >
+</head>
+<body>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h3><b>Протокол калибровки</b></h3>
+            <h3><b>Избыточное давление</b></h3>
+            <b>LLC Endress+Hauser</b>
+            <p class="mb-0">Varshavskoe shosse, dom 35 stroenie 1, 5th floor RU - 117105 Moscow</p>
+            <p class="mb-0">Tel.:+7 495 783 28 50 Fax:+7 495 783 28 55</p>
+            <br/>
+            <br/>
+            <b>Информация о заказчике</b>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">Компания</p>
+                    <p class="mb-0">Адрес</p>
+                    <p class="mb-0">Код города</p>
+                    <p class="mb-0">Номер заказа</p>
+                </div>
+                <div class="col-sm-8 b-yellow">
+                    <p class="mb-0"><b id="customerName">{{ customerName }}</b></p>
+                    <p class="mb-0"><b id="customerAddress">{{ customerAddress }}</b></p>
+                    <p class="mb-0"><b id="customerPostcode">{{ customerPostcode }}</b>&nbsp;<b id="customerCity">{{ customerCity }}</b></p>
+                    <p class="mb-0"><b id="orderNumber">{{ orderNumber }}</b></p>
+                </div>
+            </div>
+            <br/>
+             <b>Информация о приборе (ТП)</b>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">Тип прибора UUT</p>
+                    <p class="mb-0">Серийный номер</p>
+                    <p class="mb-0">Описание</p>
+                    <p class="mb-0">Изготовитель</p>
+                    <p class="mb-0">Тэг</p>
+                </div>
+                <div class="col-sm-8 b-yellow">
+                    <p class="mb-0"><b id="customСode">{{ customСode }}</b></p>
+                    <p class="mb-0"><b id="serialNumber">{{ serialNumber }}</b></p>
+                    <p class="mb-0"><b id="description">{{ description }}</b></p>
+                    <p class="mb-0"><b id="manufacturer">{{ manufacturer }}</b></p>
+                    <p class="mb-0"><b id="tag">{{ tag }}</b></p>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-4">
+                    <b>Среда</b>
+                </div>
+                <div class="col-sm-8">
+                    <b id="environment">{{ environment }}</b>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-2 mr-10">
+                </div>
+                <div class="col-md-6 mr-20">
+                    <img src="{% static 'cergen/img/logo.png' %}">
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">Номер протокола</p>
+                    <p class="mb-0">Дата калибровки</p>
+                </div>
+                <div class="col-sm-8 b-yellow">
+                    <p class="mb-0 text-right"><b>M4F0619ЮК</b></p>
+                    <p class="mb-0 text-right"><b id="calibrationData">{{ calibrationData }}</b></p>
+                </div>
+            </div>
+            <br/>
+            <b>Место калибровки</b>
+             <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">Компания</p>
+                    <br/>
+                    <p class="mb-0">Адрес</p>
+                    <p class="mb-0">Код города</p>
+                    <p class="mb-0">Контактное лицо</p>
+                </div>
+                <div class="col-sm-8 b-yellow">
+                    <p class="mb-0"><b id="recipientName">{{ recipientName }}</b></p>
+                    <br/>
+                    <p class="mb-0"><b id="recipientAddress">{{ recipientAddress }}</b></p>
+                    <p class="mb-0"><b id="recipientPostcode">{{ recipientPostcode }}</b>&nbsp;<b id="recipientCity">{{ recipientCity }}</b></p>
+                    <p class="mb-0"><b  id="contactName">{{ contactName }}</b>&nbsp;<b id="contactSurname">{{ contactSurname }}</b></p>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-5">
+                    <p class="mb-0">Диапазон измерений</p>
+                    <p class="mb-0">Выходной сигнал</p>
+                    <p class="mb-0">Диапазон калибровки</p>
+                    <p class="mb-0">Макс.допустимая ошибка</p>
+                </div>
+                <div class="col-sm-1 b-yellow">
+                    <p class="mb-0"><b id="measuringRangeFrom">{{ measuringRangeFrom }}</b></p>
+                    <p class="mb-0"><b id="outputSignalFrom">{{ outputSignalFrom }}</b></p>
+                    <p class="mb-0"><b id="сalibrationRangeFrom">{{ сalibrationRangeFrom }}</b></p>
+                </div>
+                <div class="col-sm-1 b-yellow">
+                    <p class="mb-0"><b>до</b></p>
+                    <p class="mb-0"><b>до</b></p>
+                    <p class="mb-0"><b>до</b></p>
+                    <p class="mb-0"><b id="maximumTolerance">{{ maximumTolerance }}</b></p>
+                </div>
+                <div class="col-sm-1 b-yellow">
+                    <p class="mb-0"><b id="measuringRangeTo">{{ measuringRangeTo }}</b></p>
+                    <p class="mb-0"><b id="outputSignalTo">{{ outputSignalTo }}</b></p>
+                    <p class="mb-0"><b id="сalibrationRangeTo">{{ сalibrationRangeTo }}</b></p>
+                </div>
+                <div class="col-sm-1 b-yellow">
+                    <p class="mb-0"><b id="measuringRangeUnits">{{ measuringRangeUnits }}</b></p>
+                    <p class="mb-0"><b id="outputSignalUnits">{{ outputSignalUnits }}</b></p>
+                    <p class="mb-0"><b id="сalibrationRangeUnits">{{ сalibrationRangeUnits }}</b></p>
+                    <p class="mb-0"><b>%</b></p>
+                </div>
+            </div>
+            <p class="mb-0">от текущего опорного значения</p>
+        </div>
+        <div class="col-md-12">
+            <b>Аксессуары</b>
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr class="b-gray">
+                  <th scope="col" class="p-0"><p class="b-gray m-0">Тип</p></th>
+                    <th scope="col" class="p-0"><p class="b-gray m-0">Описание</p></th>
+                    <th scope="col" class="p-0"><p class="b-gray m-0">Серийный номер</p></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="b-yellow">
+                    <th scope="col" class="p-0"><p class=" m-0">CPS91D-7BO21</p></th>
+                    <th scope="col" class="p-0"><p class=" m-0">Orbipore CPS91D Memosens</p></th>
+                    <th scope="col" class="p-0"><p class=" m-0">LB2B0D05E00</p></th>
+                </tr>
+              </tbody>
+            </table>
+            <br/>
+            <b>Используемые стандарты</b>
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr class="b-gray">
+                    <th scope="col" class="p-0"><p class="b-gray m-0">Описание</p></th>
+                    <th scope="col" class="p-0"><p class="b-gray m-0">Серийный номер</p></th>
+                    <th scope="col" class="p-0"><p class="b-gray m-0">Номер протокола</p></th>
+                    <th scope="col" class="p-0"><p class="b-gray m-0">Дата калибровки</p></th>
+                    <th scope="col" class="p-0"><p class="b-gray m-0">Срок действия</p></th>
+                </tr>
+              </thead>
+              <tbody id="standards">
+                <tr class="b-yellow">
+                    <th scope="col" class="p-0"><p class=" m-0">Образцовый раствор рH CPY20-C01A1, pH - 4,00</p></th>
+                    <th scope="col" class="p-0"><p class=" m-0"></p></th>
+                    <th scope="col" class="p-0"><p class=" m-0"></p></th>
+                    <th scope="col" class="p-0"><p class=" m-0"></p></th>
+                    <th scope="col" class="p-0"><p class=" m-0">17.03.2020</p></th>
+                </tr>
+                <tr class="b-yellow">
+                    <th scope="col" class="p-0"><p class=" m-0">Образцовый раствор рH CPY20-E01A1, pH - 7,00</p></th>
+                  <th scope="col" class="p-0"></th>
+                  <th scope="col" class="p-0"></th>
+                  <th scope="col" class="p-0"></th>
+                    <th scope="col" class="p-0"><p class=" m-0">24.04.2020</p></th>
+                </tr>
+              </tbody>
+            </table>
+            <b>Метод калибровки</b>
+            <div class="col-sm-8 pl-0 b-yellow">
+                <p class="mb-0"><b id="numberProcedure">{{ numberProcedure }}</b></p>
+                <p class="mb-0"><b id="descriptionProcedure">{{ descriptionProcedure }}</b></p>
+            </div>
+            <br/>
+            <p class="mb-0"><b>Условия окр. среды</b></p>
+            <div class="row">
+                <div class="col-sm-3">
+                    <p>Температура окр. среды</p>
+                </div>
+                <div class="col-sm-3">
+                    <p class="mb-0 b-yellow"><b>(<span id="ambientTemperature">{{ ambientTemperature }}</span> ± <span id="ambientTemperatureDeviation">{{ ambientTemperatureDeviation }}</span>) <span id="temperatureUnits">{{ temperatureUnits }}</span></b></p>
+                </div>
+                <div class="col-sm-3">
+                    <p>Влажность окр. воздуха</p>
+                </div>
+                <div class="col-sm-3">
+                    <p class="mb-0 b-yellow"><b>(<span id="ambientHumidity">{{ ambientHumidity }}</span> ± <span id="ambientHumidityDeviation">{{ ambientHumidityDeviation }}</span>) <span id="humidityUnits">{{ humidityUnits }}</span></b></p>
+                </div>
+            </div>
+            <b>Калибровка до настройки</b>
+            <table class="table table-bordered b-yellow">
+              <thead>
+                <tr>
+                  <td class="text-center">Тестовая точка</td>
+                  <td class="text-center">Установ. точка</td>
+                  <td class="text-center">Опорное значение</td>
+                  <td class="text-center">Дисплей ТП</td>
+                  <td class="text-center">Отклонение</td>
+                  <td class="text-center">+/- МДО</td>
+                </tr>
+              </thead>
+              <tbody id="testPointsTable">
+                <tr>
+                  <td class="p-0 text-center"></td>
+                    <td class="p-0 text-center"><p class="m-0">pH</p></td>
+                    <td class="p-0 text-center"><p class="m-0">pH</p></td>
+                    <td class="p-0 text-center"><p class="m-0">pH</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">pH</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">pH</p></td>
+                </tr>
+                <tr>
+                    <td class="p-0 text-center"><p class=" m-0">1</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">4,00</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">4,00</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">4,03</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">0,03</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">0,10</p></td>
+                </tr>
+                <tr>
+                    <td class="p-0 text-center"><p class=" m-0">2</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">7,00</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">7,00</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">6,98</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">-0,02</p></td>
+                    <td class="p-0 text-center"><p class=" m-0">0,10</p></td>
+                </tr>
+              </tbody>
+            </table>
+            <p>*(Максимальное) отклонение от "эталонной величины"</p>
+            <div class="row b-yellow">
+                <div class="col-sm-2">
+                    <b>Соответствие</b>
+                </div>
+                <div class="col-sm-3">
+                    <img src="{% static 'cergen/img/1.png' %}">
+                    ТП соответствует
+                </div>
+                <div class="col-sm-3">
+                    <img src="{% static 'cergen/img/0.png' %}">
+                    ТП несоответствует
+                </div>
+                <div class="col-sm-3">
+                    <b>След. калибровка</b>
+                    <b class="float-right" id="nextCalibrationDate">{{ nextCalibrationDate }}</b>
+                </div>
+            </div>
+            <b>Замечания</b>
+            <p class="b-yellow" id="note">{{ note }}</p>
+            <br/>
+            <p>Этот сертификат калибровки подтверждает прослеживаемость используемых образцовых средств измерения и использование международной
+                системы единиц измерения (SI) Этот сертификат калибровки должен публиковаться и распространяться только целиком Резульаты измерений и
+                заявление о результатах калибровки относятся только к указанным калиброванным приборам</p>
+            <br>
+            <br>
+            <div class="border-top col-sm-4">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <p>Инженер</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <b class=" b-yellow"><span id="engineerName">{{ engineerName }}</span> <span id="engineerSurname">{{ engineerSurname }}</span></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <p>Подпись</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <p>Дата печати</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <b class=" b-yellow">15.04.2019</b>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center"><b>Конец сертификата</b></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
