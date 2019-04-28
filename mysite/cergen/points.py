@@ -1,5 +1,4 @@
 import random
-from .models import DescriptionAndNumber
 
 start = 4
 end = 7
@@ -44,5 +43,6 @@ def points(start, end, mdop, mdo, npoints, rnd):
     return all_points
 
 
-d = points(start,end,mdop,mdo,npoints,rnd)
-print(d)
+if __name__ == '__main__':
+    d = points(start,end,mdop,mdo,npoints,rnd)
+    print(d)

@@ -8,8 +8,7 @@
 </head>
 <body>
     <div class="container ">
-        <div class="row border rounded shadow-sm">
-            <div class="col-md-8 border rounded shadow-sm">
+        <div class="col-md-8 border rounded shadow-sm">
                 <form enctype="multipart/form-data" method="post" action="." >
                     {% csrf_token %}
                   <div class="form-group">
@@ -19,12 +18,16 @@
                   </div>
                 </form>
             </div>
+        <form class="" method="post" action="." name="formData" target="_blank">
+            {% csrf_token %}
+        <div class="row border rounded shadow-sm">
+
+
 
 
 
             <div class="col-md-8 border rounded shadow-sm">
-                <form class="col-md-12" method="post" action="." name="formData" target="_blank">
-                    {% csrf_token %}
+
                 <h4 class="mb-3">Покупатель</h4>
                 <div class="form-group row">
                     <label for="customerID" class="col-sm-3 col-form-label col-form-label-sm">ID заказчика</label>
@@ -33,7 +36,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="customerName" class="col-sm-3 col-form-label col-form-label-sm">Название заказчика 1</label>
+                    <label for="customerName" class="col-sm-3 col-form-label col-form-label-sm">Название заказчика</label>
                     <div class="col-sm-5">
                       <input type="text" class="form-control form-control-sm" id="customerName" name="customerName">
                     </div>
@@ -44,22 +47,21 @@
                       <input type="text" class="form-control form-control-sm" id="customerAddress" name="customerAddress">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group row">
-                        <label for="customerPostcode" class="col-sm-6 col-form-label col-form-label-sm">Почтовый индекс</label>
-                        <div class="col-sm-5">
-                          <input type="text" class="form-control form-control-sm" id="customerPostcode" name="customerPostcode">
-                        </div>
+
+                <div class="form-group row">
+                    <label for="customerPostcode" class="col-sm-3 col-form-label col-form-label-sm">Почтовый индекс</label>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control form-control-sm" id="customerPostcode" name="customerPostcode">
                     </div>
-                    <div class="form-group row">
-                        <label for="customerCity" class="col-sm-2 col-form-label col-form-label-sm">Город</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control form-control-sm" id="customerCity" name="customerCity">
-                        </div>
+                    <label for="customerCity" class="col-sm-2 col-form-label col-form-label-sm">Город</label>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control form-control-sm" id="customerCity" name="customerCity">
                     </div>
                 </div>
+
             </div>
             <div class="col-md-4 border rounded shadow-sm">
+                <!--
                 <div class="form-group row">
                     <label for="documentType" class="col-sm-6 col-form-label col-form-label-sm">Тип документа</label>
                     <div class="col-sm-5">
@@ -68,6 +70,7 @@
                         </select>
                     </div>
                 </div>
+                -->
                 <div class="form-group row">
                     <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">ID местоположения</label>
                     <div class="col-sm-5">
@@ -83,7 +86,19 @@
                 <div class="form-group row">
                     <label for="calibrationData" class="col-sm-6 col-form-label col-form-label-sm">Дата калибровки</label>
                     <div class="col-sm-5">
-                      <input type="text" class="form-control form-control-sm" id="calibrationData" name="calibrationData">
+                      <input type="text" class="form-control form-control-sm" id="calibrationData" name="calibrationData" value="{{ print_calibration_date }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nextCalibrationDate" class="col-sm-6 col-form-label col-form-label-sm">Дата след. калибровки</label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control form-control-sm" id="nextCalibrationDate" name="nextCalibrationDate">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nextCalibrationDate" class="col-sm-6 col-form-label col-form-label-sm">Дата печати</label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control form-control-sm" id="printDate" name="printDate" value="{{ print_calibration_date }}">
                     </div>
                 </div>
             </div>
@@ -94,7 +109,7 @@
                     <div class="col-sm-5">
                       <input type="text" class="form-control form-control-sm" id="recipientID" name="recipientID">
                     </div>
-                    <button type="button" class="btn btn-primary btn-sm">Взять из покупателя</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="getFromCustomerButton">Взять из покупателя</button>
                 </div>
                 <div class="form-group row">
                     <label for="recipientName" class="col-sm-3 col-form-label col-form-label-sm">Название заказчика</label>
@@ -216,6 +231,29 @@
             </div>
 
             <div class="col-md-12 border rounded shadow-sm">
+                <button type="button" class="btn btn-primary mt-2 mb-2" id="accessories">Аксессуары</button>
+                <div id="showAccessories" style="display: none;">
+                    <div class="form-group row mb-0">
+                        <p class="col-sm-2">Тип</p>
+                        <p class="col-sm-2">Описание</p>
+                        <p class="col-sm-2 pl-4">Серийный номер</p>
+                    </div>
+                    <div class="form-group row">
+                        <input class="form-control-sm" name="typeAccessory1" id="typeAccessory1">
+                        <input class="form-control-sm " name="descAccessory1" id="descAccessory1">
+                        <input class="form-control-sm" name="accessorySerialNumber1" id="accessorySerialNumber1">
+                    </div>
+                    <div class="form-group row">
+                        <input class="form-control-sm" name="typeAccessory2" id="typeAccessory2">
+                        <input class="form-control-sm " name="descAccessory2" id="descAccessory2">
+                        <input class="form-control-sm" name="accessorySerialNumber2" id="accessorySerialNumber2">
+                    </div>
+                    <div class="form-group row">
+                        <input class="form-control-sm" name="typeAccessory3" id="typeAccessory3">
+                        <input class="form-control-sm " name="descAccessory3" id="descAccessory3">
+                        <input class="form-control-sm" name="accessorySerialNumber3" id="accessorySerialNumber3">
+                    </div>
+                </div>
                 <h5 class="mb-3">Инструменты</h5>
                 <div class="form-group row mb-0">
                     <p class="col-sm-2">Описание</p>
@@ -225,34 +263,35 @@
                     <p class="col-sm-2 pl-5">Срок действия</p>
                 </div>
                 <div class="form-group row">
-                    <input id="devName1" list="devNames" class="col-md-2 form-control form-control-sm">
+                    <input id="devName1" list="devNames" class="col-md-2 form-control form-control-sm" name="devName1" autocomplete="off">
                     <datalist id="devNames">
-                        <option value="number"></option>
-                        <option value="2"></option>
+                        {% for dev_name in dev_names %}
+                        <option value="{{ dev_name }}"></option>
+                        {% endfor %}
                     </datalist>
                     <input class="form-control-sm" name="devDescription1" id="devDescription1">
-                    <input class="form-control-sm " name="protocolNumber1" id="protocolNumber1">
+                    <input class="form-control-sm" name="protocolNumber1" id="protocolNumber1">
                     <input class="form-control-sm" name="calibrationDate1" id="calibrationDate1">
                     <input class="form-control-sm" name="validity1" id="validity1">
                 </div>
                 <div class="form-group row">
-                    <input id="devName2" list="devNames" class="col-md-2 form-control form-control-sm">
+                    <input id="devName2" list="devNames" class="col-md-2 form-control form-control-sm" name="devName2" autocomplete="off">
                     <input class="form-control-sm" name="devDescription2" id="devDescription2">
-                    <input class="form-control-sm " name="protocolNumber2" id="protocolNumber2">
+                    <input class="form-control-sm" name="protocolNumber2" id="protocolNumber2">
                     <input class="form-control-sm" name="calibrationDate2" id="calibrationDate2">
                     <input class="form-control-sm" name="validity2" id="validity2">
                 </div>
                 <div class="form-group row">
-                    <input id="devName3" list="devNames" class="col-md-2 form-control form-control-sm">
+                    <input id="devName3" list="devNames" class="col-md-2 form-control form-control-sm" name="devName3" autocomplete="off">
                     <input class="form-control-sm" name="devDescription3" id="devDescription3">
-                    <input class="form-control-sm " name="protocolNumber3" id="protocolNumber3">
+                    <input class="form-control-sm" name="protocolNumber3" id="protocolNumber3">
                     <input class="form-control-sm" name="calibrationDate3" id="calibrationDate3">
                     <input class="form-control-sm" name="validity3" id="validity3">
                 </div>
                 <div class="form-group row">
-                    <input id="devName4" list="devNames" class="col-md-2 form-control form-control-sm">
+                    <input id="devName4" list="devNames" class="col-md-2 form-control form-control-sm" name="devName4" autocomplete="off">
                     <input class="form-control-sm" name="devDescription4" id="devDescription4">
-                    <input class="form-control-sm " name="protocolNumber4" id="protocolNumber4">
+                    <input class="form-control-sm" name="protocolNumber4" id="protocolNumber4">
                     <input class="form-control-sm" name="calibrationDate4" id="calibrationDate4">
                     <input class="form-control-sm" name="validity4" id="validity4">
                 </div>
@@ -260,90 +299,83 @@
 
             <div class="col-md-8 border rounded shadow-sm">
                 <h4 class="mb-3">General settings</h4>
-                <div class="form-row">
-                    <div class="form-group row">
-                        <label for="measuringRangeFrom" class="col-sm-6 col-form-label col-form-label-sm">Диапазон измер. от</label>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control form-control-sm" id="measuringRangeFrom" name="measuringRangeFrom" value="-1">
-                        </div>
+                <div class="form-group row">
+                    <label for="measuringRangeFrom" class="col-sm-3 col-form-label col-form-label-sm">Диапазон измер. от</label>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="measuringRangeFrom" name="measuringRangeFrom" value="-1">
                     </div>
-                    <div class="form-group row">
-                        <label for="measuringRangeTo" class="col-sm-2 col-form-label col-form-label-sm">до</label>
-                        <div class="col-sm-6">
-                          <input type="text" class="form-control form-control-sm" id="measuringRangeTo" name="measuringRangeTo" value="10">
-                        </div>
+                    <label for="measuringRangeTo" class="col-sm-1 col-form-label col-form-label-sm">до</label>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="measuringRangeTo" name="measuringRangeTo" value="10">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="measuringRangeUnits" class="col-sm-3 col-form-label col-form-label-sm">Единицы измерения</label>
                     <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="measuringRangeUnits" name="measuringRangeUnits">
+                        <input list="measuringRangeUnitsList" class="form-control form-control-sm" id="measuringRangeUnits" name="measuringRangeUnits">
+                        <datalist id="measuringRangeUnitsList">
                             <option value="bar">bar</option>
-                        </select>
+                        </datalist>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group row">
-                        <label for="outputSignalFrom" class="col-sm-6 col-form-label col-form-label-sm">Выходной сигнал от</label>
-                        <div class="col-sm-4">
-                          <input class="form-control form-control-sm" id="outputSignalFrom" name="outputSignalFrom" value="4">
-                        </div>
+                <div class="form-group row">
+                    <label for="outputSignalFrom" class="col-sm-3 col-form-label col-form-label-sm">Выходной сигнал от</label>
+                    <div class="col-sm-2">
+                      <input class="form-control form-control-sm" id="outputSignalFrom" name="outputSignalFrom" value="4">
                     </div>
-                    <div class="form-group row">
-                        <label for="outputSignalTo" class="col-sm-2 col-form-label col-form-label-sm">до</label>
-                        <div class="col-sm-6">
-                          <input type="text" class="form-control form-control-sm" value="20" id="outputSignalTo" name="outputSignalTo">
-                        </div>
+                    <label for="outputSignalTo" class="col-sm-1 col-form-label col-form-label-sm">до</label>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" value="20" id="outputSignalTo" name="outputSignalTo">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="outputSignalUnits" class="col-sm-3 col-form-label col-form-label-sm">Един. измерения вых.</label>
                     <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="outputSignalUnits" name="outputSignalUnits">
+                        <input list="outputSignalUnitsList" class="form-control form-control-sm" id="outputSignalUnits" name="outputSignalUnits" value="mA">
+                        <datalist id="outputSignalUnitsList">
                             <option value="mA">mA</option>
-                        </select>
+                        </datalist>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group row">
-                        <label for="сalibrationRangeFrom" class="col-sm-6 col-form-label col-form-label-sm">Диапазон калибровки от</label>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control form-control-sm" id="сalibrationRangeFrom" name="сalibrationRangeFrom">
-                        </div>
+                <div class="form-group row">
+                    <label for="сalibrationRangeFrom" class="col-sm-3 col-form-label col-form-label-sm">Диапазон калибровки от</label>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="сalibrationRangeFrom" name="сalibrationRangeFrom">
                     </div>
-                    <div class="form-group row">
-                        <label for="сalibrationRangeTo" class="col-sm-2 col-form-label col-form-label-sm">до</label>
-                        <div class="col-sm-6">
-                          <input type="text" class="form-control form-control-sm" id="сalibrationRangeTo" name="сalibrationRangeTo">
-                        </div>
+                    <label for="сalibrationRangeTo" class="col-sm-1 col-form-label col-form-label-sm">до</label>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="сalibrationRangeTo" name="сalibrationRangeTo">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="сalibrationRangeUnits" class="col-sm-3 col-form-label col-form-label-sm">Единицы калибровки</label>
                     <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="сalibrationRangeUnits" name="сalibrationRangeUnits">
+                        <input list="сalibrationRangeUnitsList" class="form-control form-control-sm" id="сalibrationRangeUnits" name="сalibrationRangeUnits">
+                        <datalist id="сalibrationRangeUnitsList">
                             <option value="bar">bar</option>
-                        </select>
+                        </datalist>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="descriptionProcedure" class="col-sm-3 col-form-label col-form-label-sm">Описание процедуры</label>
                     <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="descriptionProcedure" name="descriptionProcedure">
+                        <input list="descriptionProcedureList" class="form-control form-control-sm" id="descriptionProcedure" name="descriptionProcedure">
+                        <datalist id="descriptionProcedureList">
                             {% for desc in procedure_descriptions %}
                             <option value="{{ desc }}">{{ desc }}</option>
                             {% endfor %}
-                        </select>
+                        </datalist>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="numberProcedure" class="col-sm-3 col-form-label col-form-label-sm">Номер процедуры</label>
                     <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="numberProcedure" name="numberProcedure">
+                        <input list="numberProcedureList" class="form-control form-control-sm" id="numberProcedure" name="numberProcedure">
+                        <datalist id="numberProcedureList">
                             {% for  number in procedure_numbers %}
                             <option value="{{ number }}">{{ number }}</option>
                             {% endfor %}
-                        </select>
+                        </datalist>
                     </div>
                 </div>
             </div>
@@ -410,9 +442,18 @@
             <div class="col-md-8 border rounded shadow-sm">
                 <h4 class="mb-3">Medium</h4>
                 <div class="form-group row">
-                    <label for="environment" class="col-sm-6 col-form-label col-form-label-sm">Среда</label>
+                    <label for="environment" class="col-sm-3 col-form-label col-form-label-sm">Среда</label>
                     <div class="col-sm-5">
                       <input type="text" class="form-control form-control-sm" id="environment" name="environment">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="environment" class="col-sm-3 col-form-label col-form-label-sm">Температура</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-sm" id="environmentTemperature" name="environmentTemperature">
+                    </div>
+                    <div class="col-sm-1">
+                      <input type="text" class="form-control form-control-sm" id="environmentTemperatureUnits" name="environmentTemperatureUnits" value="°C">
                     </div>
                 </div>
             </div>
@@ -422,9 +463,10 @@
                 <div class="form-group row">
                     <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Стандарт</label>
                     <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="">
+                        <input list="standardsList" class="form-control form-control-sm" id="standards" autocomplete="off">
+                        <datalist id="standardsList">
                             <option value="Отклонение показаний ОИ от эталона">Отклонение показаний ОИ от эталона</option>
-                        </select>
+                        </datalist>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -440,12 +482,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="nextCalibrationDate" class="col-sm-4 col-form-label col-form-label-sm">Дата след. калибровки</label>
-                    <div class="col-sm-5">
-                      <input type="text" class="form-control form-control-sm" id="nextCalibrationDate" name="nextCalibrationDate">
-                    </div>
-                </div>
             </div>
 
             <div class="col-md-8 border rounded shadow-sm">
@@ -453,7 +489,7 @@
                 <div class="form-group row">
                     <label for="ambientTemperature" class="col-sm-3 col-form-label col-form-label-sm">Окр. температура</label>
                     <div class="col-sm-3">
-                      <input type="text" class="form-control form-control-sm" id="ambientTemperature" name="ambientTemperature">
+                      <input type="text" class="form-control form-control-sm" id="ambientTemperature" name="ambientTemperature" value="25">
                     </div>
                     <label for="ambientTemperatureDeviation" class="col-form-label col-form-label-sm">+-</label>
                     <div class="col-sm-1">
@@ -466,7 +502,7 @@
                 <div class="form-group row">
                     <label for="ambientHumidity" class="col-sm-3 col-form-label col-form-label-sm">Влажность окр. воздуха</label>
                     <div class="col-sm-3">
-                      <input type="text" class="form-control form-control-sm" id="ambientHumidity" name="ambientHumidity">
+                      <input type="text" class="form-control form-control-sm" id="ambientHumidity" name="ambientHumidity" value="74">
                     </div>
                     <label for="ambientHumidityDeviation" class="col-form-label col-form-label-sm">+-</label>
                     <div class="col-sm-1">
@@ -479,10 +515,14 @@
                 <div class="form-group row">
                     <label for="note" class="col-sm-3 col-form-label col-form-label-sm">Примечание</label>
                     <div class="col-sm-5">
-                        <select class="form-control form-control-sm" id="note" name="note">
+                        <input list="noteList" class="form-control form-control-sm" id="note" name="note">
+                        <datalist id="noteList">
                             <option value="Точность соответствует спецификации">Точность соответствует спецификации</option>
-                        </select>
+                        </datalist>
                     </div>
+                </div>
+                <div class="col-sm-10 mb-3 pl-0">
+                    <textarea rows="3" list="noteList" class="form-control form-control-sm" id="anotherNote" name="anotherNote"></textarea>
                 </div>
             </div>
 
@@ -522,16 +562,18 @@
                 <div class="form-group" id="testPoints">
 
                 </div>
-
+                <input type="submit" value="Сгенерировать сертификат" class="form-control-button">
             </div>
-            <input type="submit" value="Отправить" class="form-control-button">
-        </form>
+
+
         </div>
+    </form>
     </div>
 
     <script src="{% static 'cergen/js/jquery.min.js' %}"></script>
     <script src="{% static 'cergen/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript">
+
 			$('#serialNumber').change(function() {
 				var serial_number = $(this).val();
 				$.ajax({
@@ -564,6 +606,7 @@
 				});
 			});
 
+            // create test points table
 			$('#maximumToleranceProcent').change(function() {
 				var measuringRangeFrom = $('#measuringRangeFrom').val();
                     measuringRangeTo = $('#measuringRangeTo').val();
@@ -604,6 +647,169 @@
 						$test_points.change();
 					}
 				});
+			});
+
+			$(document).ready(function(){
+                $('#accessories').click(function() {
+                  $('#showAccessories').toggle("slide");
+                });
+            });
+
+            // send descriptionProcedure and get numberProcedure
+            $('#descriptionProcedure').change(function() {
+				var description_procedure = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_description_procedure/',
+					data:{'description_procedure':description_procedure},
+					dataType: "text",
+					cache: false,
+					success: function (data) {
+						json = JSON.parse(data);
+						$('#numberProcedure').val('');
+						$('#numberProcedure').val($('#numberProcedure').val() + json);
+						$('#customСode').change();
+
+					}
+				});
+			});
+
+			// send devName and get other stuff
+            $('#devName1').change(function() {
+				var dev_name = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_dev_name/',
+					data:{'dev_name':dev_name},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+					    console.log(data);
+
+						$('#devDescription1').val('');
+						$('#devDescription1').val($('#devDescription1').val() + data['serial_number']);
+						$('#devDescription1').change();
+
+						$('#protocolNumber1').val('');
+						$('#protocolNumber1').val($('#protocolNumber1').val() + data['protocol']);
+						$('#protocolNumber1').change();
+
+						$('#calibrationDate1').val('');
+						$('#calibrationDate1').val($('#calibrationDate1').val() + data['callibration_data']);
+						$('#calibrationDate1').change();
+
+						$('#validity1').val('');
+						$('#validity1').val($('#validity1').val() + data['validity']);
+						$('#validity1').change();
+					}
+				});
+			});
+
+			$('#devName2').change(function() {
+				var dev_name = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_dev_name/',
+					data:{'dev_name':dev_name},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+						$('#devDescription2').val('');
+						$('#devDescription2').val($('#devDescription2').val() + data['serial_number']);
+						$('#devDescription2').change();
+
+						$('#protocolNumber2').val('');
+						$('#protocolNumber2').val($('#protocolNumber2').val() + data['protocol']);
+						$('#protocolNumber2').change();
+
+						$('#calibrationDate2').val('');
+						$('#calibrationDate2').val($('#calibrationDate2').val() + data['callibration_data']);
+						$('#calibrationDate2').change();
+
+						$('#validity2').val('');
+						$('#validity2').val($('#validity2').val() + data['validity']);
+						$('#validity2').change();
+					}
+				});
+			});
+
+			$('#devName3').change(function() {
+				var dev_name = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_dev_name/',
+					data:{'dev_name':dev_name},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+						$('#devDescription3').val('');
+						$('#devDescription3').val($('#devDescription3').val() + data['serial_number']);
+						$('#devDescription3').change();
+
+						$('#protocolNumber3').val('');
+						$('#protocolNumber3').val($('#protocolNumber3').val() + data['protocol']);
+						$('#protocolNumber3').change();
+
+						$('#calibrationDate3').val('');
+						$('#calibrationDate3').val($('#calibrationDate3').val() + data['callibration_data']);
+						$('#calibrationDate3').change();
+
+						$('#validity3').val('');
+						$('#validity3').val($('#validity3').val() + data['validity']);
+						$('#validity3').change();
+					}
+				});
+			});
+
+			$('#devName4').change(function() {
+				var dev_name = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_dev_name/',
+					data:{'dev_name':dev_name},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+						$('#devDescription4').val('');
+						$('#devDescription4').val($('#devDescription4').val() + data['serial_number']);
+						$('#devDescription4').change();
+
+						$('#protocolNumber4').val('');
+						$('#protocolNumber4').val($('#protocolNumber4').val() + data['protocol']);
+						$('#protocolNumber4').change();
+
+						$('#calibrationDate4').val('');
+						$('#calibrationDate4').val($('#calibrationDate4').val() + data['callibration_data']);
+						$('#calibrationDate4').change();
+
+						$('#validity4').val('');
+						$('#validity4').val($('#validity4').val() + data['validity']);
+						$('#validity4').change();
+					}
+				});
+			});
+
+			// Get data from customer inputs and put it in recipient inputs
+			$('#getFromCustomerButton').click(function() {
+                $('#recipientID').val('');
+                $('#recipientID').val($('#customerID').val());
+                $('#recipientID').change();
+
+                $('#recipientName').val('');
+                $('#recipientName').val($('#customerName').val());
+                $('#recipientName').change();
+
+                $('#recipientAddress').val('');
+                $('#recipientAddress').val($('#customerAddress').val());
+                $('#recipientAddress').change();
+
+                $('#recipientPostcode').val('');
+                $('#recipientPostcode').val($('#customerPostcode').val());
+                $('#recipientPostcode').change();
+
+                $('#recipientCity').val('');
+                $('#recipientCity').val($('#customerCity').val());
+                $('#recipientCity').change();
 			});
 	</script>
 </body>
