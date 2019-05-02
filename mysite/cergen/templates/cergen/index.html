@@ -149,7 +149,7 @@
                 <div class="form-group row">
                     <label for="serialNumber" class="col-sm-6 col-form-label col-form-label-sm">Серийный №</label>
                     <div class="col-sm-5">
-                        <input class="form-control form-control-sm" id="serialNumber" list="serialNumbers" name="serialNumber">
+                        <input class="form-control form-control-sm" id="serialNumber" list="serialNumbers" name="serialNumber" autocomplete="off">
                         <datalist id="serialNumbers">
                             {% for number in serial_numbers %}
                             <option value="{{ number }}">{{ number }}</option>
@@ -176,15 +176,9 @@
                       <input type="text" class="form-control form-control-sm" id="tag" name="tag">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="colFormLabelSm" class="col-sm-6 col-form-label col-form-label-sm">Адрес в шине</label>
-                    <div class="col-sm-5">
-                      <input type="text" class="form-control form-control-sm" id="colFormLabelSm">
-                    </div>
-                </div>
             </div>
 
-            <div class="col-md-8 border rounded shadow-sm">
+            <div class="col-md-6 border rounded shadow-sm">
                 <h4 class="mb-3">Контактное лицо</h4>
                 <div class="form-row">
                     <div class="form-group row">
@@ -201,66 +195,95 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-8 border rounded shadow-sm">
+            <div class="col-md-6 border rounded shadow-sm">
                 <h4 class="mb-3">Инженер</h4>
                 <div class="form-row">
                     <div class="form-group row">
                         <label for="engineerName" class="col-sm-2 col-form-label col-form-label-sm">Имя</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control form-control-sm" id="engineerName" name="engineerName">
+                          <input type="text" class="form-control form-control-sm" id="engineerName" name="engineerName" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="engineerSurname" class="col-sm-3 col-form-label col-form-label-sm">Фамилия</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control form-control-sm" id="engineerSurname" name="engineerSurname">
+                          <input type="text" class="form-control form-control-sm" id="engineerSurname" name="engineerSurname" required>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-8 border rounded shadow-sm">
+            <div class="col-md-12 border rounded shadow-sm">
                 <h4 class="mb-3">Настройки калибровки</h4>
                 <div class="form-group row">
-                    <label for="principle" class="col-sm-6 col-form-label col-form-label-sm">Принцип</label>
-                    <div class="col-sm-5">
-                      <input type="text" class="form-control form-control-sm" id="principle" name="principle">
-                    </div>
+                    <label for="principle" class="col-sm-2 col-form-label col-form-label-sm">Принцип</label>
+                    <input list="principleCategoryList" type="text" class="col-sm-3 form-control form-control-sm" id="principleCategory" name="principleCategory" autocomplete="off">
+                    <datalist id="principleCategoryList">
+                        {% for category in principle_categories %}
+                        <option value="{{ category }}"></option>
+                        {% endfor %}
+                    </datalist>
+                    <input list="principleList" type="text" class="ml-3 col-sm-6 form-control form-control-sm" id="principle" name="principle" autocomplete="off" required>
+                    <datalist id="principleList">
+                    </datalist>
                 </div>
             </div>
 
             <div class="col-md-12 border rounded shadow-sm">
-                <button type="button" class="btn btn-primary mt-2 mb-2" id="accessories">Аксессуары</button>
+                <button type="button" class="btn btn-primary mt-2 mb-2 btn-sm" id="accessories">Аксессуары</button>
                 <div id="showAccessories" style="display: none;">
+                    <button type="button" class="btn btn-primary mt-2 mb-2 btn-sm" id="accessoryAddButton">Создать или редактировать аксессуар</button>
                     <div class="form-group row mb-0">
                         <p class="col-sm-2">Тип</p>
                         <p class="col-sm-2">Описание</p>
                         <p class="col-sm-2 pl-4">Серийный номер</p>
                     </div>
+                    <div id="showAccessoryAdd" class="border rounded-lg border-primary col-md-12" style="display: none;">
+                        <div class="form-group row">
+                            <input list="typeAccessory" class="form-control-sm col-md-2" name="typeAccessoryAdd" id="typeAccessoryAdd"  autocomplete="off">
+                            <input class="form-control-sm " name="descAccessoryAdd" id="descAccessoryAdd">
+                            <input class="form-control-sm" name="accessorySerialNumberAdd" id="accessorySerialNumberAdd">
+                        </div>
+                        <button type="button" class="btn btn-primary mt-2 mb-2 btn-sm" id="accessorySendButton">Создать/Редактировать</button>
+                    </div>
                     <div class="form-group row">
-                        <input class="form-control-sm" name="typeAccessory1" id="typeAccessory1">
+                        <input list="typeAccessory" class="form-control-sm" name="typeAccessory1" id="typeAccessory1"  autocomplete="off">
+                        <datalist id="typeAccessory">
+                        {% for type in type_accessories %}
+                        <option value="{{ type }}"></option>
+                        {% endfor %}
+                        </datalist>
                         <input class="form-control-sm " name="descAccessory1" id="descAccessory1">
                         <input class="form-control-sm" name="accessorySerialNumber1" id="accessorySerialNumber1">
                     </div>
                     <div class="form-group row">
-                        <input class="form-control-sm" name="typeAccessory2" id="typeAccessory2">
+                        <input list="typeAccessory" class="form-control-sm" name="typeAccessory2" id="typeAccessory2"  autocomplete="off">
                         <input class="form-control-sm " name="descAccessory2" id="descAccessory2">
                         <input class="form-control-sm" name="accessorySerialNumber2" id="accessorySerialNumber2">
                     </div>
                     <div class="form-group row">
-                        <input class="form-control-sm" name="typeAccessory3" id="typeAccessory3">
+                        <input list="typeAccessory" class="form-control-sm" name="typeAccessory3" id="typeAccessory3"  autocomplete="off">
                         <input class="form-control-sm " name="descAccessory3" id="descAccessory3">
                         <input class="form-control-sm" name="accessorySerialNumber3" id="accessorySerialNumber3">
                     </div>
                 </div>
                 <h5 class="mb-3">Инструменты</h5>
+                <button type="button" class="btn btn-primary mt-2 mb-2 btn-sm" id="devAddButton">Создать или редактировать инструмент</button>
                 <div class="form-group row mb-0">
                     <p class="col-sm-2">Описание</p>
                     <p class="col-sm-2 pl-2">Серийный номер</p>
                     <p class="col-sm-2 pl-3">Номер протокола</p>
                     <p class="col-sm-2 pl-4">Дата калибровки</p>
                     <p class="col-sm-2 pl-5">Срок действия</p>
+                </div>
+                <div id="showDevAdd" class="border rounded-lg border-primary col-md-12" style="display: none;">
+                    <div class="form-group row">
+                        <input id="devNameAdd" list="devNames" class="form-control-sm col-2" name="devNameAdd" autocomplete="off">
+                        <input class="form-control-sm" name="devDescriptionAdd" id="devDescriptionAdd">
+                        <input class="form-control-sm" name="protocolNumberAdd" id="protocolNumberAdd">
+                        <input class="form-control-sm" name="calibrationDateAdd" id="calibrationDateAdd">
+                        <input class="form-control-sm" name="validityAdd" id="validityAdd">
+                    </div>
+                    <button type="button" class="btn btn-primary mt-2 mb-2" id="devSendButton">Создать/Редактировать</button>
                 </div>
                 <div class="form-group row">
                     <input id="devName1" list="devNames" class="col-md-2 form-control form-control-sm" name="devName1" autocomplete="off">
@@ -302,17 +325,17 @@
                 <div class="form-group row">
                     <label for="measuringRangeFrom" class="col-sm-3 col-form-label col-form-label-sm">Диапазон измер. от</label>
                     <div class="col-sm-2">
-                      <input type="text" class="form-control form-control-sm" id="measuringRangeFrom" name="measuringRangeFrom" value="-1">
+                      <input type="text" class="form-control form-control-sm" id="measuringRangeFrom" name="measuringRangeFrom" required>
                     </div>
                     <label for="measuringRangeTo" class="col-sm-1 col-form-label col-form-label-sm">до</label>
                     <div class="col-sm-2">
-                      <input type="text" class="form-control form-control-sm" id="measuringRangeTo" name="measuringRangeTo" value="10">
+                      <input type="text" class="form-control form-control-sm" id="measuringRangeTo" name="measuringRangeTo" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="measuringRangeUnits" class="col-sm-3 col-form-label col-form-label-sm">Единицы измерения</label>
                     <div class="col-sm-5">
-                        <input list="measuringRangeUnitsList" class="form-control form-control-sm" id="measuringRangeUnits" name="measuringRangeUnits">
+                        <input list="measuringRangeUnitsList" class="form-control form-control-sm" id="measuringRangeUnits" name="measuringRangeUnits" required>
                         <datalist id="measuringRangeUnitsList">
                             <option value="bar">bar</option>
                         </datalist>
@@ -321,17 +344,17 @@
                 <div class="form-group row">
                     <label for="outputSignalFrom" class="col-sm-3 col-form-label col-form-label-sm">Выходной сигнал от</label>
                     <div class="col-sm-2">
-                      <input class="form-control form-control-sm" id="outputSignalFrom" name="outputSignalFrom" value="4">
+                      <input class="form-control form-control-sm" id="outputSignalFrom" name="outputSignalFrom" value="4" >
                     </div>
                     <label for="outputSignalTo" class="col-sm-1 col-form-label col-form-label-sm">до</label>
                     <div class="col-sm-2">
-                      <input type="text" class="form-control form-control-sm" value="20" id="outputSignalTo" name="outputSignalTo">
+                      <input type="text" class="form-control form-control-sm" value="20" id="outputSignalTo" name="outputSignalTo" >
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="outputSignalUnits" class="col-sm-3 col-form-label col-form-label-sm">Един. измерения вых.</label>
                     <div class="col-sm-5">
-                        <input list="outputSignalUnitsList" class="form-control form-control-sm" id="outputSignalUnits" name="outputSignalUnits" value="mA">
+                        <input list="outputSignalUnitsList" class="form-control form-control-sm" id="outputSignalUnits" name="outputSignalUnits" value="mA" >
                         <datalist id="outputSignalUnitsList">
                             <option value="mA">mA</option>
                         </datalist>
@@ -340,44 +363,23 @@
                 <div class="form-group row">
                     <label for="сalibrationRangeFrom" class="col-sm-3 col-form-label col-form-label-sm">Диапазон калибровки от</label>
                     <div class="col-sm-2">
-                      <input type="text" class="form-control form-control-sm" id="сalibrationRangeFrom" name="сalibrationRangeFrom">
+                      <input type="text" class="form-control form-control-sm" id="сalibrationRangeFrom" name="сalibrationRangeFrom" required>
                     </div>
                     <label for="сalibrationRangeTo" class="col-sm-1 col-form-label col-form-label-sm">до</label>
                     <div class="col-sm-2">
-                      <input type="text" class="form-control form-control-sm" id="сalibrationRangeTo" name="сalibrationRangeTo">
+                      <input type="text" class="form-control form-control-sm" id="сalibrationRangeTo" name="сalibrationRangeTo" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="сalibrationRangeUnits" class="col-sm-3 col-form-label col-form-label-sm">Единицы калибровки</label>
                     <div class="col-sm-5">
-                        <input list="сalibrationRangeUnitsList" class="form-control form-control-sm" id="сalibrationRangeUnits" name="сalibrationRangeUnits">
+                        <input list="сalibrationRangeUnitsList" class="form-control form-control-sm" id="сalibrationRangeUnits" name="сalibrationRangeUnits" required>
                         <datalist id="сalibrationRangeUnitsList">
                             <option value="bar">bar</option>
                         </datalist>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="descriptionProcedure" class="col-sm-3 col-form-label col-form-label-sm">Описание процедуры</label>
-                    <div class="col-sm-5">
-                        <input list="descriptionProcedureList" class="form-control form-control-sm" id="descriptionProcedure" name="descriptionProcedure">
-                        <datalist id="descriptionProcedureList">
-                            {% for desc in procedure_descriptions %}
-                            <option value="{{ desc }}">{{ desc }}</option>
-                            {% endfor %}
-                        </datalist>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="numberProcedure" class="col-sm-3 col-form-label col-form-label-sm">Номер процедуры</label>
-                    <div class="col-sm-5">
-                        <input list="numberProcedureList" class="form-control form-control-sm" id="numberProcedure" name="numberProcedure">
-                        <datalist id="numberProcedureList">
-                            {% for  number in procedure_numbers %}
-                            <option value="{{ number }}">{{ number }}</option>
-                            {% endfor %}
-                        </datalist>
-                    </div>
-                </div>
+
             </div>
 
             <div class="col-md-4 border rounded shadow-sm">
@@ -404,6 +406,30 @@
                         <option value="0">Нет</option>
                     </select>
                 </div>
+                <br>
+                <div class="form-group row mb-1">
+                    <label for="descriptionProcedure" class="col-sm-10 col-form-label col-form-label-sm">Описание процедуры</label>
+                    <div class="col-sm-12">
+                        <input list="descriptionProcedureList" class="form-control form-control-sm" id="descriptionProcedure" name="descriptionProcedure">
+                        <datalist id="descriptionProcedureList">
+                            {% for desc in procedure_descriptions %}
+                            <option value="{{ desc }}">{{ desc }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="numberProcedure" class="col-sm-10 col-form-label col-form-label-sm">Номер процедуры</label>
+                    <div class="col-sm-12">
+                        <input list="numberProcedureList" class="form-control form-control-sm" id="numberProcedure" name="numberProcedure">
+                        <datalist id="numberProcedureList">
+                            {% for  number in procedure_numbers %}
+                            <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </div>
+                <!--
                 <div class="form-group row">
                     <div class="input-group-text">
                       <input type="checkbox" >
@@ -437,6 +463,7 @@
                       <input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="bar">
                     </div>
                 </div>
+                -->
             </div>
 
             <div class="col-md-8 border rounded shadow-sm">
@@ -452,17 +479,52 @@
                     <div class="col-sm-4">
                       <input type="text" class="form-control form-control-sm" id="environmentTemperature" name="environmentTemperature">
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                       <input type="text" class="form-control form-control-sm" id="environmentTemperatureUnits" name="environmentTemperatureUnits" value="°C">
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="environment" class="col-sm-3 col-form-label col-form-label-sm">Давление</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-sm" id="environmentPressure" name="environmentPressure">
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="environmentPressureUnits" name="environmentPressureUnits">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="environment" class="col-sm-3 col-form-label col-form-label-sm">Плотность</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-sm" id="environmentDensity" name="environmentDensity">
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="environmentDensityUnits" name="environmentDensityUnits">
+                    </div>
+                </div><div class="form-group row">
+                    <label for="environment" class="col-sm-3 col-form-label col-form-label-sm">Проводимость</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-sm" id="environmentConductivity" name="environmentConductivity">
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="environmentConductivityUnits" name="environmentConductivityUnits">
+                    </div>
+                </div><div class="form-group row">
+                    <label for="environment" class="col-sm-3 col-form-label col-form-label-sm">Диэлектрическая</label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-sm" id="environmentDielectric" name="environmentDielectric">
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control form-control-sm" id="environmentDielectricUnits" name="environmentDielectricUnits">
+                    </div>
+                </div>
+
             </div>
 
-            <div class="col-md-8 border rounded shadow-sm">
+            <div class="col-md-4 border rounded shadow-sm">
                 <h4 class="mb-3">Advanced settings</h4>
                 <div class="form-group row">
-                    <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Стандарт</label>
-                    <div class="col-sm-5">
+                    <label for="colFormLabelSm" class="col-sm-10 col-form-label col-form-label-sm">Стандарт</label>
+                    <div class="col-sm-12">
                         <input list="standardsList" class="form-control form-control-sm" id="standards" autocomplete="off">
                         <datalist id="standardsList">
                             <option value="Отклонение показаний ОИ от эталона">Отклонение показаний ОИ от эталона</option>
@@ -470,7 +532,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="testPointsNumber" class="col-sm-4 col-form-label col-form-label-sm">Кол-во точек тестирования</label>
+                    <label for="testPointsNumber" class="col-sm-10 col-form-label col-form-label-sm">Кол-во точек тестирования</label>
                     <div class="col-sm-5">
                         <select class="form-control form-control-sm" id="testPointsNumber" name="testPointsNumber">
                             <option value="1">1</option>
@@ -540,12 +602,6 @@
                     Не Ок
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="complianceCalibration" id="exampleRadios3" value="option3">
-                  <label class="form-check-label" for="exampleRadios3">
-                    Нет заключения
-                  </label>
-                </div>
             </div>
 
             <div class="col-md-12 border rounded shadow-sm">
@@ -562,7 +618,9 @@
                 <div class="form-group" id="testPoints">
 
                 </div>
-                <input type="submit" value="Сгенерировать сертификат" class="form-control-button">
+                <button type="button" class="btn btn-primary btn-sm" id="generatorTestPoints">Сгенерировать таблицу точек</button>
+                <a type="button" id=""></a>
+                <input type="submit" value="Сгенерировать сертификат" class="form-control-button float-right">
             </div>
 
 
@@ -585,29 +643,32 @@
 					success: function (data) {
 						json = JSON.parse(data);
 						console.log(JSON.parse(data))
-						$('#customСode').val('');
-						$('#customСode').val($('#customСode').val() + json["Ordercode"]);
-						$('#customСode').change();
 
-                        $('#description').val('');
-						$('#description').val($('#description').val() + json["Description"]);
-						$('#description').change();
+						$('#customСode').val(json["Ordercode"]);
 
-						$('#manufacturer').val('');
-						$('#manufacturer').val($('#manufacturer').val() + json["Manufacturer"]);
-						$('#manufacturer').change();
+						$('#description').val(json["Description"]);
 
-						$('#tag').val('');
-						$('#tag').val($('#tag').val() + json["Tag no."]);
-						$('#tag').change();
+						$('#manufacturer').val(json["Manufacturer"]);
 
+						$('#tag').val(json["Tag no."]);
 
+						$('#measuringRangeFrom').val(json["start"]);
+
+						$('#measuringRangeTo').val(json["end"]);
+
+						$('#measuringRangeUnits').val(json["units"]);
+
+						$('#сalibrationRangeFrom').val(json["start"]);
+
+						$('#сalibrationRangeTo').val(json["end"]);
+
+						$('#сalibrationRangeUnits').val(json["units"]);
 					}
 				});
 			});
 
             // create test points table
-			$('#maximumToleranceProcent').change(function() {
+			$('#generatorTestPoints').click(function() {
 				var measuringRangeFrom = $('#measuringRangeFrom').val();
                     measuringRangeTo = $('#measuringRangeTo').val();
                     maximumToleranceProcent = $('#maximumToleranceProcent').val();
@@ -666,8 +727,8 @@
 					cache: false,
 					success: function (data) {
 						json = JSON.parse(data);
-						$('#numberProcedure').val('');
-						$('#numberProcedure').val($('#numberProcedure').val() + json);
+						
+						$('#numberProcedure').val(json);
 						$('#customСode').change();
 
 					}
@@ -685,22 +746,14 @@
 					cache: false,
 					success: function (data) {
 					    console.log(data);
+						$('#devDescription1').val(data['serial_number']);
 
-						$('#devDescription1').val('');
-						$('#devDescription1').val($('#devDescription1').val() + data['serial_number']);
-						$('#devDescription1').change();
+						$('#protocolNumber1').val(data['protocol']);
 
-						$('#protocolNumber1').val('');
-						$('#protocolNumber1').val($('#protocolNumber1').val() + data['protocol']);
-						$('#protocolNumber1').change();
+						$('#calibrationDate1').val(data['callibration_data']);
 
-						$('#calibrationDate1').val('');
-						$('#calibrationDate1').val($('#calibrationDate1').val() + data['callibration_data']);
-						$('#calibrationDate1').change();
-
-						$('#validity1').val('');
-						$('#validity1').val($('#validity1').val() + data['validity']);
-						$('#validity1').change();
+						$('#validity1').val(data['validity']);
+						
 					}
 				});
 			});
@@ -714,21 +767,15 @@
 					dataType: "json",
 					cache: false,
 					success: function (data) {
-						$('#devDescription2').val('');
-						$('#devDescription2').val($('#devDescription2').val() + data['serial_number']);
-						$('#devDescription2').change();
+						
+						$('#devDescription2').val(data['serial_number']);
 
-						$('#protocolNumber2').val('');
-						$('#protocolNumber2').val($('#protocolNumber2').val() + data['protocol']);
-						$('#protocolNumber2').change();
+						$('#protocolNumber2').val(data['protocol']);
 
-						$('#calibrationDate2').val('');
-						$('#calibrationDate2').val($('#calibrationDate2').val() + data['callibration_data']);
-						$('#calibrationDate2').change();
+						$('#calibrationDate2').val(data['callibration_data']);
 
-						$('#validity2').val('');
-						$('#validity2').val($('#validity2').val() + data['validity']);
-						$('#validity2').change();
+						$('#validity2').val(data['validity']);
+						
 					}
 				});
 			});
@@ -742,21 +789,13 @@
 					dataType: "json",
 					cache: false,
 					success: function (data) {
-						$('#devDescription3').val('');
-						$('#devDescription3').val($('#devDescription3').val() + data['serial_number']);
-						$('#devDescription3').change();
+						$('#devDescription3').val(data['serial_number']);
 
-						$('#protocolNumber3').val('');
-						$('#protocolNumber3').val($('#protocolNumber3').val() + data['protocol']);
-						$('#protocolNumber3').change();
+						$('#protocolNumber3').val(data['protocol']);
 
-						$('#calibrationDate3').val('');
-						$('#calibrationDate3').val($('#calibrationDate3').val() + data['callibration_data']);
-						$('#calibrationDate3').change();
+						$('#calibrationDate3').val(data['callibration_data']);
 
-						$('#validity3').val('');
-						$('#validity3').val($('#validity3').val() + data['validity']);
-						$('#validity3').change();
+						$('#validity3').val(data['validity']);
 					}
 				});
 			});
@@ -770,47 +809,223 @@
 					dataType: "json",
 					cache: false,
 					success: function (data) {
-						$('#devDescription4').val('');
-						$('#devDescription4').val($('#devDescription4').val() + data['serial_number']);
-						$('#devDescription4').change();
+						
+						$('#devDescription4').val(data['serial_number']);
 
-						$('#protocolNumber4').val('');
-						$('#protocolNumber4').val($('#protocolNumber4').val() + data['protocol']);
-						$('#protocolNumber4').change();
+						$('#protocolNumber4').val(data['protocol']);
 
-						$('#calibrationDate4').val('');
-						$('#calibrationDate4').val($('#calibrationDate4').val() + data['callibration_data']);
-						$('#calibrationDate4').change();
+						$('#calibrationDate4').val(data['callibration_data']);
 
-						$('#validity4').val('');
-						$('#validity4').val($('#validity4').val() + data['validity']);
-						$('#validity4').change();
+						$('#validity4').val(data['validity']);
+						
 					}
 				});
 			});
 
 			// Get data from customer inputs and put it in recipient inputs
 			$('#getFromCustomerButton').click(function() {
-                $('#recipientID').val('');
+                
                 $('#recipientID').val($('#customerID').val());
-                $('#recipientID').change();
 
-                $('#recipientName').val('');
                 $('#recipientName').val($('#customerName').val());
-                $('#recipientName').change();
 
-                $('#recipientAddress').val('');
                 $('#recipientAddress').val($('#customerAddress').val());
-                $('#recipientAddress').change();
 
-                $('#recipientPostcode').val('');
                 $('#recipientPostcode').val($('#customerPostcode').val());
-                $('#recipientPostcode').change();
 
-                $('#recipientCity').val('');
                 $('#recipientCity').val($('#customerCity').val());
-                $('#recipientCity').change();
 			});
+
+			// Get principles
+			$('#principleCategory').change(function() {
+				var principle_category = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_principle_category/',
+					data:{'principle_category':principle_category},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+						var $principle_list = $('#principleList')
+						json = JSON.parse(data);
+						$principle_list.empty();
+						console.log(JSON.parse(data))
+						for (var i = 0; i < json.length; i++) {
+							$principle_list.append('<option value="' + json[i]+ '"></option>');
+						}
+
+					}
+				});
+			});
+
+            // Show adding device
+			$(document).ready(function(){
+                $('#devAddButton').click(function() {
+                  $('#showDevAdd').toggle("slide");
+                });
+                $('#devSendButton').click(function() {
+                  $('#showDevAdd').toggle("slide");
+                });
+            });
+
+            // Show adding accessories
+			$(document).ready(function(){
+                $('#accessoryAddButton').click(function() {
+                  $('#showAccessoryAdd').toggle("slide");
+                });
+                $('#accessorySendButton').click(function() {
+                  $('#showAccessoryAdd').toggle("slide");
+                });
+            });
+
+            // Send new devise
+            $('#devSendButton').click(function() {
+				var dev_name = $('#devNameAdd').val();
+				    dev_description = $('#devDescriptionAdd').val();
+				    protocol_number = $('#protocolNumberAdd').val();
+				    calibration_date = $('#calibrationDateAdd').val();
+				    validity = $('#validityAdd').val();
+				console.log(dev_name);
+				$.ajax({
+					type:'GET',
+					url:'get_device/',
+					data:{'dev_name':dev_name,
+					      'dev_description':dev_description,
+					      'protocol_number':protocol_number,
+					      'calibration_date':calibration_date,
+					      'validity':validity},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+					    var $devNames = $('#devNames');
+					    console.log(data);
+						$devNames.empty();
+						for (var i = 0; i < data.length; i++) {
+							$devNames.append('<option value="' + data[i]+ '"></option>');
+						}
+					}
+				});
+			});
+
+			$('#devNameAdd').change(function() {
+				var dev_name = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_dev_name/',
+					data:{'dev_name':dev_name},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+
+						$('#devDescriptionAdd').val(data['serial_number']);
+
+						$('#protocolNumberAdd').val(data['protocol']);
+
+						$('#calibrationDateAdd').val(data['callibration_data']);
+
+						$('#validityAdd').val(data['validity']);
+
+					}
+				});
+			});
+
+			// Send new accessory
+            $('#accessorySendButton').click(function() {
+				var typeAccessoryAdd = $('#typeAccessoryAdd').val();
+				    descAccessoryAdd = $('#descAccessoryAdd').val();
+				    accessorySerialNumberAdd = $('#accessorySerialNumberAdd').val();
+				$.ajax({
+					type:'GET',
+					url:'get_accessory/',
+					data:{'typeAccessoryAdd':typeAccessoryAdd,
+					      'descAccessoryAdd':descAccessoryAdd,
+					      'accessorySerialNumberAdd':accessorySerialNumberAdd},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+					    var $typeAccessory = $('#typeAccessory');
+					    console.log(data);
+						$typeAccessory.empty();
+						for (var i = 0; i < data.length; i++) {
+							$typeAccessory.append('<option value="' + data[i]+ '"></option>');
+						}
+					}
+				});
+			});
+
+
+			$('#typeAccessoryAdd').change(function() {
+				var accessory = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_accessory_type/',
+					data:{'accessory':accessory},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+
+						$('#descAccessoryAdd').val(data['description']);
+
+						$('#accessorySerialNumberAdd').val(data['serial_number']);
+
+					}
+				});
+			});
+
+			$('#typeAccessory1').change(function() {
+				var accessory = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_accessory_type/',
+					data:{'accessory':accessory},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+
+						$('#descAccessory1').val(data['description']);
+
+						$('#accessorySerialNumber1').val(data['serial_number']);
+
+					}
+				});
+			});
+
+			$('#typeAccessory2').change(function() {
+				var accessory = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_accessory_type/',
+					data:{'accessory':accessory},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+
+						$('#descAccessory2').val(data['description']);
+
+						$('#accessorySerialNumber2').val(data['serial_number']);
+
+					}
+				});
+			});
+
+			$('#typeAccessory3').change(function() {
+				var accessory = $(this).val();
+				$.ajax({
+					type:'GET',
+					url:'get_accessory_type/',
+					data:{'accessory':accessory},
+					dataType: "json",
+					cache: false,
+					success: function (data) {
+
+						$('#descAccessory3').val(data['description']);
+
+						$('#accessorySerialNumber3').val(data['serial_number']);
+
+					}
+				});
+			});
+
 	</script>
 </body>
 </html>

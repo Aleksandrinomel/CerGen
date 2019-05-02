@@ -64,16 +64,69 @@
             {% if environmentTemperature %}
             <div class="row">
                 <div class="col-sm-3">
-                    <p>Температура</p>
+                    <p class="mb-0">Температура</p>
                 </div>
                 <div class="col-sm-1">
-                    <p id="environmentTemperature">{{ environmentTemperature }}</p>
+                    <p class="mb-0" id="environmentTemperature" >{{ environmentTemperature }}</p>
                 </div>
-                <div class="col-sm-1">
-                    <p id="environmentTemperatureUnits">{{ environmentTemperatureUnits }}</p>
+                <div class="col-sm-2">
+                    <p class="mb-0" id="environmentTemperatureUnits">{{ environmentTemperatureUnits }}</p>
                 </div>
             </div>
             {% endif %}
+            {% if environmentPressure %}
+            <div class="row">
+                <div class="col-sm-3">
+                    <p class="mb-0">Давление</p>
+                </div>
+                <div class="col-sm-1">
+                    <p class="mb-0" id="environmentPressure">{{ environmentPressure }}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0" id="environmentPressureUnits">{{ environmentPressureUnits }}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% if environmentDensity %}
+            <div class="row">
+                <div class="col-sm-3">
+                    <p class="mb-0">Плотность</p>
+                </div>
+                <div class="col-sm-1">
+                    <p class="mb-0" id="environmentDensity">{{ environmentDensity }}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0" id="environmentDensityUnits">{{ environmentDensityUnits }}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% if environmentConductivity %}
+            <div class="row">
+                <div class="col-sm-3">
+                    <p class="mb-0">Проводимость</p>
+                </div>
+                <div class="col-sm-1">
+                    <p class="mb-0" id="environmentConductivity">{{ environmentConductivity }}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0" id="environmentConductivityUnits">{{ environmentConductivityUnits }}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% if environmentDielectric %}
+            <div class="row">
+                <div class="col-sm-3">
+                    <p class="mb-0">Диэлектрическая</p>
+                </div>
+                <div class="col-sm-1">
+                    <p class="mb-0" id="environmentDielectric">{{ environmentDielectric }}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0" id="environmentDielectricUnits">{{ environmentDielectricUnits }}</p>
+                </div>
+            </div>
+            {% endif %}
+
 
         </div>
         <div class="col-md-6">
@@ -91,7 +144,7 @@
                     <p class="mb-0">Дата калибровки</p>
                 </div>
                 <div class="col-sm-8 ">
-                    <p class="mb-0 text-right"><b>M4F0619ЮК</b></p>
+                    <p class="mb-0 text-right" id="protocolNumber"><b>{{ protocol_number }}</b></p>
                     <p class="mb-0 text-right"><b id="calibrationData">{{ calibrationData }}</b></p>
                 </div>
             </div>

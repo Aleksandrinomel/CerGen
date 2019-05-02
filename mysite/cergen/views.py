@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import DescriptionAndNumber, ReferenceEquipment
+from .models import DescriptionAndNumber, ReferenceEquipment, Principle, Accessory
 import csv
 import codecs
 from .points import points
 from datetime import datetime
+import random
 
 
 def index(request):
@@ -25,6 +26,10 @@ def index(request):
     # Обработка данных из формы для построения шаблона сертификата
     if request.method == 'POST' and 'note' in request.POST:
         context.update(dict(request.POST.items()))
+
+        # Номер протокола
+        protocol_number = '{}{}{}'.format(random.randint(1000000, 9999999), request.POST['engineerName'][0], request.POST['engineerSurname'][0])
+        context.setdefault('protocol_number', protocol_number)
 
         # Таблица точек тестирования
         test_points = []
@@ -65,10 +70,14 @@ def index(request):
     procedure_descriptions = DescriptionAndNumber.objects.values_list('description', flat=True)
     procedure_numbers = DescriptionAndNumber.objects.values_list('number', flat=True)
     dev_names = ReferenceEquipment.objects.values_list('description', flat=True)
+    principle_categories = Principle.objects.values_list('category', flat=True)
+    type_accessories = Accessory.objects.values_list('type', flat=True)
 
     print_calibration_date = datetime.now().strftime('%d.%m.%Y')
 
     context = {
+        'type_accessories': type_accessories,
+        'principle_categories': principle_categories,
         'print_calibration_date': print_calibration_date,
         'dev_names': dev_names,
         'serial_numbers': serial_numbers,
@@ -113,6 +122,45 @@ def get_dev_name(request):
         dev_stuff = ReferenceEquipment.objects.filter(description=request.GET['dev_name']).values()[0]
         print(dev_stuff)
     return JsonResponse(dev_stuff, safe=False)
+
+
+def get_principle_category(request):
+    if request.method == 'GET':
+        category = Principle.objects.get(category=request.GET['principle_category'])
+        principle = category.principle
+    return JsonResponse(principle, safe=False)
+
+
+def get_device(request):
+    if request.method == 'GET':
+        device, created = ReferenceEquipment.objects.get_or_create(description=request.GET['dev_name'])
+        device.serial_number = request.GET['dev_description']
+        device.protocol = request.GET['protocol_number']
+        device.callibration_data = request.GET['calibration_date']
+        device.validity = request.GET['validity']
+        device.save()
+        dev_names = list(ReferenceEquipment.objects.values_list('description', flat=True))
+
+    return JsonResponse(dev_names, safe=False)
+
+
+def get_accessory(request):
+    if request.method == 'GET':
+        accessory, created = Accessory.objects.get_or_create(type=request.GET['typeAccessoryAdd'])
+        accessory.description = request.GET['descAccessoryAdd']
+        accessory.serial_number = request.GET['accessorySerialNumberAdd']
+        accessory.save()
+        accessories = list(Accessory.objects.values_list('type', flat=True))
+        print(accessory)
+
+    return JsonResponse(accessories, safe=False)
+
+
+def get_accessory_type(request):
+    if request.method == 'GET':
+        accessory_stuff = Accessory.objects.filter(type=request.GET['accessory']).values()[0]
+        print(accessory_stuff)
+    return JsonResponse(accessory_stuff, safe=False)
 
 
 def template(request):
